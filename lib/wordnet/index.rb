@@ -7,13 +7,14 @@ class Index
   end
   
   def find(lemma_str)
-    index = File.open(File.join(WordNet.path,"dict","index.#{@pos}"),"r")
+    index = File.open(File.join(WordNetDB.path,"dict","index.#{@pos}"),"r")
     loop do
       line = index.readline
       if line =~ /^#{lemma_str} /
         index.close
         return Lemma.new(line)
       end
+      break if index.eof?
     end
     index.close
     

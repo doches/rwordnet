@@ -4,7 +4,7 @@ class TestIndex < Test::Unit::TestCase
   require File.dirname(__FILE__) + "/../path.rb"
   
   def setup
-    WordNet::WordNet.path=WordNetPath
+    WordNet::WordNetDB.path=WordNetPath
     @index = WordNet::NounIndex.new
   end
   
