@@ -1,9 +1,11 @@
 module WordNet
 
+# Represents a single word in the WordNet lexicon, which can be used to look up a set of synsets.
 class Lemma
   attr_accessor :lemma, :pos, :synset_cnt, :p_cnt, :ptr_symbol, :tagsense_cnt, :synset_offset
   
-  # Create a lemma from a line in an index file
+  # Create a lemma from a line in an index file. You should be creating Lemmas by hand; instead,
+  # use the WordNet#find and Index#find methods to find the Lemma for a word.
   def initialize(index_line)
     line = index_line.split(" ")
     
@@ -20,6 +22,7 @@ class Lemma
     @synset_cnt.times { @synset_offset.push line.shift.to_i }
   end
   
+  # Return a list of synsets for this Lemma. Each synset represents a different sense, or meaning, of the word.
   def get_synsets
     return @synset_offset.map { |offset| Synset.new(@pos, offset) }
   end
