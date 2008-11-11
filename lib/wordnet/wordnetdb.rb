@@ -1,6 +1,8 @@
 module WordNet
 
 class WordNetDB
+  @@path = File.join(File.dirname(__FILE__),"/../../WordNet-3.0/")
+
   def WordNetDB.path=(path_to_wordnet)
     @@path = path_to_wordnet
   end
