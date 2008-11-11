@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + "/../test_helper.rb"
 
 class TestSynset < Test::Unit::TestCase
-  require File.dirname(__FILE__) + "/../path.rb"
-  
   def setup
     WordNet::WordNetDB.path=WordNetPath
     index = WordNet::NounIndex.new

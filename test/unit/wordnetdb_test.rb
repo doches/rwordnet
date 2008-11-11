@@ -2,8 +2,6 @@ require File.dirname(__FILE__) + "/../test_helper.rb"
 
 class TestWordNetDB < Test::Unit::TestCase
   include WordNet
-
-  require File.dirname(__FILE__) + "/../path.rb"
   
   test 'set and read path' do
     WordNetDB.path = WordNetPath
