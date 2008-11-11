@@ -10,8 +10,8 @@ on the database that comes with WordNet.
 If you're doing something data-intensive you will achieve much better performance
 with Michael Granger's [Ruby-WordNet](http://www.deveiate.org/projects/Ruby-WordNet/), 
 since it converts the WordNet database into a BerkelyDB file for quicker access. In 
-writing rwordnet, I've focused more on usability and ease of installation (_gem install 
-wordnet_) at the expense of some performance. Use at your own risk, etc.
+writing rwordnet, I've focused more on usability and ease of installation ( *gem install 
+rwordnet* ) at the expense of some performance. Use at your own risk, etc.
 
 ## Installation ##
 
@@ -26,6 +26,9 @@ Of course, if you want to use your own WordNet installation, that's easy too -- 
 set the path to WordNet's database files before using the library (see examples below).
 
 ## Usage ##
+
+The other benefit of rwordnet over Ruby-WordNet is that it's so much easier (IMHO) to
+use. 
 
 As a quick example, consider finding all of the glosses for a given word:
 
@@ -44,5 +47,5 @@ No problem:
     
     include WordNet
     WordNetDB.path = "/path/to/WordNet-3.0"
-    WordNetDB.find("fruit")
+    lemma = WordNetDB.find("fruit")
     ...
