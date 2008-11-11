@@ -1,9 +1,6 @@
 require 'rubygems'
 require 'wordnet'
 
-# Change this to point to your WordNet installation
-WordNet::WordNet.path = "/home/doches/Code/WordNet/WordNet-3.0"
-
 # Open the index file for nouns
 index = WordNet::NounIndex.new
 # Find the word 'fruit'
