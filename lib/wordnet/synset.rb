@@ -78,7 +78,7 @@ class Synset
     
     return [parent, parent.expanded_hypernym].flatten
   end
-
+  
   def to_s
     "(#{@ss_type}) #{words.map {|x| x.gsub('_',' ')}.join(', ')} (#{@gloss})"
   end

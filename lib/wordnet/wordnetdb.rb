@@ -28,7 +28,7 @@ class WordNetDB
   # Register a new DB file handle. You shouldn't need to call this method; it's called automatically every time you open an index or data file.
   def WordNetDB.open(path)
     # If the file is already open, just return the handle.
-    return @@files[path] if @@files.include?(path) and @@files[path].respond_to?(:readline)
+    return @@files[path] if @@files.include?(path) and not @@files[path].closed?
     
     # Open and store 
     @@files[path] = File.open(path,"r")
@@ -41,7 +41,6 @@ class WordNetDB
   end
   
   def WordNetDB.finalize(id)
-    puts "closing #{id}"
     @@files.each_value do |handle| 
       begin
         handle.close

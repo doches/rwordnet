@@ -9,9 +9,6 @@ end
 
 word = ARGV[0]
 
-# Point this to your WordNet installation.
-#WordNet::WordNet.path = "/home/doches/Code/WordNet/WordNet-3.0"
-
 # Find all the lemmas for a word (i.e., whether it occurs as a noun, verb, etc.)
 lemmas = WordNet::WordNetDB.find(word)
 

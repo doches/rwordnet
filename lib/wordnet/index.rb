@@ -17,14 +17,17 @@ class Index
     
     # If we didn't find it, read in some more from the DB. Some optimisation is possible here. TODO.
     index = WordNetDB.open(File.join(WordNetDB.path,"dict","index.#{@pos}"))
-    loop do
-      break if index.eof?
-      line = index.readline
-      lemma = Lemma.new(line)
-      @db[lemma.word] = lemma
-      if line =~ /^#{lemma_str} /
-        return lemma
+    if not index.closed?
+      loop do
+        break if index.eof?
+        line = index.readline
+        lemma = Lemma.new(line)
+        @db[lemma.word] = lemma
+        if line =~ /^#{lemma_str} /
+          return lemma
+        end
       end
+      index.close
     end
     
     return nil
