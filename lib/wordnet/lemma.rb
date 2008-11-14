@@ -32,6 +32,7 @@ class Lemma
   end
   
   alias synsets get_synsets
+  alias word lemma
 end
 
 end

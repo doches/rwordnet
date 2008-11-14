@@ -5,20 +5,27 @@ class Index
   # Create a new index for the given part of speech. +pos+ can be one of +noun+, +verb+, +adj+, or +adv+.
   def initialize(pos)
     @pos = pos
+    @db = {}
   end
   
   # Find a lemma for a given word. Returns a Lemma which can then be used to access the synsets for the word.
   def find(lemma_str)
-    index = File.open(File.join(WordNetDB.path,"dict","index.#{@pos}"),"r")
-    loop do
-      line = index.readline
-      if line =~ /^#{lemma_str} /
-        index.close
-        return Lemma.new(line)
-      end
-      break if index.eof?
+    # Look for the lemma in the part of the DB already read...
+    @db.each_key do |word|
+      return @db[word] if word == lemma_str
     end
-    index.close
+    
+    # If we didn't find it, read in some more from the DB. Some optimisation is possible here. TODO.
+    index = WordNetDB.open(File.join(WordNetDB.path,"dict","index.#{@pos}"))
+    loop do
+      break if index.eof?
+      line = index.readline
+      lemma = Lemma.new(line)
+      @db[lemma.word] = lemma
+      if line =~ /^#{lemma_str} /
+        return lemma
+      end
+    end
     
     return nil
   end
