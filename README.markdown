@@ -15,10 +15,11 @@ rwordnet* ) at the expense of some performance. Use at your own risk, etc.
 
 ## Installation ##
 
-One of the chief benefits of rwordnet over Ruby-WordNet is how easy it is to install;
+One of the chief benefits of rwordnet over Ruby-WordNet is how easy it is to install:
 
-    gem sources -a http://gems.github.com # Add github to your rubygems sources
-    sudo gem install doches-rwordnet      # Install rwordnet
+    gem install gemcutter  # These two steps are only necessary if you haven't
+    gem tumble             # yet installed the gemcutter tools
+    gem install rwordnet
     
 That's it! rwordnet comes bundled with the WordNet database which it uses by default, 
 so there's absolutely nothing else to download, install, or configure.
