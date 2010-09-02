@@ -1,2 +1,9 @@
+# rWordNet 0.1.2
+* Added unique (integer) ids to lemmas [Wolfram Sieber]
+
+# rWordNet 0.1.1
+* Maintenance release, fixing some broken unit tests.
+* Updated the interface for using Indices; where before you could instantiate an Index by calling, e.g., NounIndex.new, now you instantiate them as singleton instances (`NounIndex.instance`).
+
 # rWordNet 0.1.0
 * Initial release

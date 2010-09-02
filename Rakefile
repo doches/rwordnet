@@ -9,7 +9,7 @@ begin
     gem.description = %Q{A pure Ruby interface to the WordNet database}
     gem.email = "doches@gmail.com"
     gem.homepage = "http://github.com/doches/rwordnet"
-    gem.authors = ["Trevor Fountain"]
+    gem.authors = ["Trevor Fountain", "Wolfram Sieber"]
     gem.files = FileList["lib/**/*","History.txt","WordNet-3.0/**/*","examples/**/*","test/**/*","README.markdown"]
   end
   Jeweler::GemcutterTasks.new
