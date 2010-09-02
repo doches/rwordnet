@@ -2,11 +2,12 @@ module WordNet
 
 # Represents a single word in the WordNet lexicon, which can be used to look up a set of synsets.
 class Lemma
-  attr_accessor :lemma, :pos, :synset_cnt, :p_cnt, :ptr_symbol, :tagsense_cnt, :synset_offset
-  
+  attr_accessor :lemma, :pos, :synset_cnt, :p_cnt, :ptr_symbol, :tagsense_cnt, :synset_offset, :id
+
   # Create a lemma from a line in an index file. You should be creating Lemmas by hand; instead,
   # use the WordNet#find and Index#find methods to find the Lemma for a word.
-  def initialize(index_line)
+  def initialize(index_line, id = 0)
+    @id = (id > 0) ? id : nil
     line = index_line.split(" ")
     
     @lemma = line.shift
