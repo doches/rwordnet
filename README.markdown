@@ -31,14 +31,21 @@ set the path to WordNet's database files before using the library (see examples 
 The other benefit of rwordnet over Ruby-WordNet is that it's so much easier (IMHO) to
 use. 
 
-As a quick example, consider finding all of the glosses for a given word:
+As a quick example, consider finding all of the noun glosses for a given word:
 
     require 'rubygems'
     require 'wordnet'
     
-    index = WordNet::NounIndex.new
+    index = WordNet::NounIndex.instance
     lemma = index.find("fruit")
     lemma.synsets.each { |synset| puts synset.gloss }
+
+...or all of the glosses, period:
+
+    lemmas = WordNet::WordNetDB.find("fruit")
+    synsets = lemmas.map { |lemma| lemma.synsets }
+    words = synsets.flatten
+    words.each { |word| puts word.gloss }
 
 Have your own WordNet database that you've marked up with extra attributes and whatnot?
 No problem:
@@ -48,5 +55,5 @@ No problem:
     
     include WordNet
     WordNetDB.path = "/path/to/WordNet-3.0"
-    lemma = WordNetDB.find("fruit")
+    lemmas = WordNetDB.find("fruit")
     ...

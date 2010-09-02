@@ -4,7 +4,7 @@ class TestIndex < Test::Unit::TestCase
   @@index = nil
   
   def setup
-    @@index = WordNet::NounIndex.new if @@index.nil?
+    @@index = WordNet::NounIndex.instance if @@index.nil?
   end
   
   test 'find a lemma by string' do

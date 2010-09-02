@@ -20,7 +20,7 @@ class WordNetDB
   def WordNetDB.find(word)
     lemmas = []
     [NounIndex, VerbIndex, AdjectiveIndex, AdverbIndex].each do |index|
-      lemmas.push index.new.find(word)
+      lemmas.push index.instance.find(word)
     end
     return lemmas.flatten.reject { |x| x.nil? }
   end

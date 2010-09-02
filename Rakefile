@@ -39,9 +39,8 @@ Rake::RDocTask.new do |rdoc|
   end
  
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "Clusterfuck #{version}"
+  rdoc.title = "rwordnet #{version}"
   rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/*.rb')
-  rdoc.main = "README.rdoc"
+  rdoc.rdoc_files.include('lib/wordnet/*.rb')
   rdoc.options += ["-SHN","-f","darkfish"]
 end

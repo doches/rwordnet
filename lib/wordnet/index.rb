@@ -1,6 +1,8 @@
+require 'singleton'
 module WordNet
 
 # Index is a WordNet lexicon. Note that Index is the base class; you probably want to be using the NounIndex, VerbIndex, etc. classes instead.
+# Note that Indices are Singletons -- get an Index object by calling <POS>Index.instance, not <POS>Index.new.
 class Index
   # Create a new index for the given part of speech. +pos+ can be one of +noun+, +verb+, +adj+, or +adv+.
   def initialize(pos)
@@ -11,9 +13,7 @@ class Index
   # Find a lemma for a given word. Returns a Lemma which can then be used to access the synsets for the word.
   def find(lemma_str)
     # Look for the lemma in the part of the DB already read...
-    @db.each_key do |word|
-      return @db[word] if word == lemma_str
-    end
+    return @db[lemma_str] if @db.include?(lemma_str)
     
     # If we didn't find it, read in some more from the DB. Some optimisation is possible here. TODO.
     index = WordNetDB.open(File.join(WordNetDB.path,"dict","index.#{@pos}"))
@@ -30,33 +30,42 @@ class Index
       index.close
     end
     
+    # If we *still* didn't find it, return nil. It must not be in the database...
     return nil
   end
 end
 
-# An Index of nouns.
+# An Index of nouns. Create a NounIndex by calling `NounIndex.instance`
 class NounIndex < Index
+  include Singleton
+  
   def initialize
     super("noun")
   end
 end
 
-# An Index of verbs.
+# An Index of verbs. Create a VerbIndex by calling `VerbIndex.instance`
 class VerbIndex < Index
+  include Singleton
+
   def initialize
     super("verb")
   end
 end
 
-# An Index of adjectives.
+# An Index of adjectives. Create an AdjectiveIndex by `AdjectiveIndex.instance`
 class AdjectiveIndex < Index
+  include Singleton
+
   def initialize
     super("adj")
   end
 end
 
-# An Index of adverbs.
+# An Index of adverbs. Create an AdverbIndex by `AdverbIndex.instance`
 class AdverbIndex < Index
+  include Singleton
+
   def initialize
     super("adv")
   end

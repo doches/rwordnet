@@ -5,7 +5,7 @@ class TestSynset < Test::Unit::TestCase
 
   def setup
     if @@synsets.nil?
-      index = WordNet::NounIndex.new
+      index = WordNet::NounIndex.instance
       lemma = index.find("fruit")
       @@synsets = lemma.get_synsets
     end
