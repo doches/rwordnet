@@ -8,6 +8,8 @@ class Index
   def initialize(pos)
     @pos = pos
     @db = {}
+    
+    @finished_reading = false
   end
   
   # Find a lemma for a given word. Returns a Lemma which can then be used to access the synsets for the word.
@@ -15,7 +17,9 @@ class Index
     # Look for the lemma in the part of the DB already read...
     return @db[lemma_str] if @db.include?(lemma_str)
     
-    # If we didn't find it, read in some more from the DB. Some optimisation is possible here. TODO.
+    return nil if @finished_reading
+    
+    # If we didn't find it, read in some more from the DB.
     index = WordNetDB.open(File.join(WordNetDB.path,"dict","index.#{@pos}"))
 
     lemma_counter = 1
@@ -31,6 +35,8 @@ class Index
       end
       index.close
     end
+    
+    @finished_reading = true
     
     # If we *still* didn't find it, return nil. It must not be in the database...
     return nil
