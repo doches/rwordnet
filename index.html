@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>rwordnet by doches</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>rwordnet</h1>
+        <p>A pure Ruby interface to the WordNet database</p>
+        <p class="view"><a href="https://github.com/doches/rwordnet">View the Project on GitHub <small>doches/rwordnet</small></a></p>
+        <ul>
+          <li><a href="https://github.com/doches/rwordnet/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/doches/rwordnet/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/doches/rwordnet">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>A pure Ruby interface to WordNet</h1>
+
+<p>This library implements a pure Ruby interface to the WordNet lexical/semantic
+database. Unlike existing ruby bindings, this one doesn't require you to convert 
+the original WordNet database into a new database format; instead it can work directly
+on the database that comes with WordNet.</p>
+
+<p>If you're doing something data-intensive you will achieve much better performance
+with Michael Granger's <a href="http://www.deveiate.org/projects/Ruby-WordNet/">Ruby-WordNet</a>, 
+since it converts the WordNet database into a BerkelyDB file for quicker access. In 
+writing rwordnet, I've focused more on usability and ease of installation ( <em>gem install 
+rwordnet</em> ) at the expense of some performance. Use at your own risk, etc.</p>
+
+<h2>Installation</h2>
+
+<p>One of the chief benefits of rwordnet over Ruby-WordNet is how easy it is to install:</p>
+
+<pre><code>gem install rwordnet
+</code></pre>
+
+<p>That's it! rwordnet comes bundled with the WordNet database which it uses by default, 
+so there's absolutely nothing else to download, install, or configure.
+Of course, if you want to use your own WordNet installation, that's easy too -- just 
+set the path to WordNet's database files before using the library (see examples below).</p>
+
+<h2>Usage</h2>
+
+<p>The other benefit of rwordnet over Ruby-WordNet is that it's so much easier (IMHO) to
+use. </p>
+
+<p>As a quick example, consider finding all of the noun glosses for a given word:</p>
+
+<pre><code>require 'rubygems'
+require 'wordnet'
+
+index = WordNet::NounIndex.instance
+lemma = index.find("fruit")
+lemma.synsets.each { |synset| puts synset.gloss }
+</code></pre>
+
+<p>...or all of the glosses, period:</p>
+
+<pre><code>lemmas = WordNet::WordNetDB.find("fruit")
+synsets = lemmas.map { |lemma| lemma.synsets }
+words = synsets.flatten
+words.each { |word| puts word.gloss }
+</code></pre>
+
+<p>Have your own WordNet database that you've marked up with extra attributes and whatnot?
+No problem:</p>
+
+<pre><code>require 'rubygems'
+require 'wordnet'
+
+include WordNet
+WordNetDB.path = "/path/to/WordNet-3.0"
+lemmas = WordNetDB.find("fruit")
+...
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/doches">doches</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
