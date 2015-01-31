@@ -1,0 +1,16 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bump (0.5.1)
+    json (1.8.2)
+    rake (10.4.2)
+    rdoc (4.1.1)
+      json (~> 1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bump
+  rake
+  rdoc
