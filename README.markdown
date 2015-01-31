@@ -33,27 +33,31 @@ use.
 
 As a quick example, consider finding all of the noun glosses for a given word:
 
-    require 'rubygems'
-    require 'wordnet'
+```Ruby
+require 'wordnet'
 
-    index = WordNet::NounIndex.instance
-    lemma = index.find("fruit")
-    lemma.synsets.each { |synset| puts synset.gloss }
+index = WordNet::NounIndex.instance
+lemma = index.find("fruit")
+lemma.synsets.each { |synset| puts synset.gloss }
+```
 
 ...or all of the glosses, period:
 
-    lemmas = WordNet::WordNetDB.find("fruit")
-    synsets = lemmas.map { |lemma| lemma.synsets }
-    words = synsets.flatten
-    words.each { |word| puts word.gloss }
+```Ruby
+lemmas = WordNet::WordNetDB.find("fruit")
+synsets = lemmas.map { |lemma| lemma.synsets }
+words = synsets.flatten
+words.each { |word| puts word.gloss }
+```
 
 Have your own WordNet database that you've marked up with extra attributes and whatnot?
 No problem:
 
-    require 'rubygems'
-    require 'wordnet'
+```Ruby
+require 'wordnet'
 
-    include WordNet
-    WordNetDB.path = "/path/to/WordNet-3.0"
-    lemmas = WordNetDB.find("fruit")
-    ...
+include WordNet
+WordNetDB.path = "/path/to/WordNet-3.0"
+lemmas = WordNetDB.find("fruit")
+...
+```
