@@ -2,6 +2,14 @@
 
 [![Build Status](https://travis-ci.org/doches/rwordnet.png)](https://travis-ci.org/doches/rwordnet)
 
+## Summary ##
+
++ Works directly on the database that comes with WordNet
++ No gem or native dependencies
++ *Very* easy to install
++ Small footprint (8.1M vs 24M for Ruby-Wordnet+DB)
++ Can use a custom, existing WordNet installation
+
 ## About ##
 
 This library implements a pure Ruby interface to the WordNet lexical/semantic
@@ -11,11 +19,9 @@ on the database that comes with WordNet.
 
 If you're doing something data-intensive you will achieve much better performance
 with Michael Granger's [Ruby-WordNet](http://www.deveiate.org/projects/Ruby-WordNet/),
-since it converts the WordNet database into a BerkelyDB file for quicker access.  
-rwordnet has a much smaller footprint, with no gem or native dependencies, and requires 
-about a third of the space on disk as Ruby-Wordnet + DB. In writing rwordnet, I've 
-focused more on usability and ease of installation ( *gem install rwordnet* ) at the 
-expense of some performance. Use at your own risk, etc.
+since it converts the WordNet database into a BerkelyDB file for quicker access.  rwordnet has a much smaller footprint, with no gem or native dependencies, and requires about a third of the space on disk as Ruby-Wordnet + DB. In
+writing rwordnet, I've focused more on usability and ease of installation ( *gem install
+rwordnet* ) at the expense of some performance. Use at your own risk, etc.
 
 ## Installation ##
 
