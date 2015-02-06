@@ -1,63 +1,53 @@
 # A pure Ruby interface to WordNet #
 
-[![Build Status](https://travis-ci.org/doches/rwordnet.png)](https://travis-ci.org/doches/rwordnet)
+ - Works directly on the database that comes with WordNet
+ - Includes WordNet database (total size: 8.1M vs 24M Ruby-Wordnet+DB)
+ - No gem/native dependencies
+ - Can use different WordNet installation (see examples below)
 
-## About ##
-
-This library implements a pure Ruby interface to the WordNet lexical/semantic
-database. Unlike existing ruby bindings, this one doesn't require you to convert
-the original WordNet database into a new database format; instead it can work directly
-on the database that comes with WordNet.
-
-If you're doing something data-intensive you will achieve much better performance
-with Michael Granger's [Ruby-WordNet](http://www.deveiate.org/projects/Ruby-WordNet/),
-since it converts the WordNet database into a BerkelyDB file for quicker access. In
-writing rwordnet, I've focused more on usability and ease of installation ( *gem install
-rwordnet* ) at the expense of some performance. Use at your own risk, etc.
+For data-intensive tasks [Ruby-WordNet](http://www.deveiate.org/projects/Ruby-WordNet/) can be faster since since it converts the WordNet database into a BerkelyDB file.
 
 ## Installation ##
 
-One of the chief benefits of rwordnet over Ruby-WordNet is how easy it is to install:
-
-    gem install rwordnet
-
-That's it! rwordnet comes bundled with the WordNet database which it uses by default,
-so there's absolutely nothing else to download, install, or configure.
-Of course, if you want to use your own WordNet installation, that's easy too -- just
-set the path to WordNet's database files before using the library (see examples below).
+```Bash
+gem install rwordnet
+```
 
 ## Usage ##
 
-The other benefit of rwordnet over Ruby-WordNet is that it's so much easier (IMHO) to
-use.
-
-As a quick example, consider finding all of the noun glosses for a given word:
+Finding all of the noun glosses for a given word:
 
 ```Ruby
 require 'wordnet'
 
 index = WordNet::NounIndex.instance
 lemma = index.find("fruit")
-lemma.synsets.each { |synset| puts synset.gloss }
+puts lemma.synsets.map(&:gloss)
 ```
 
-...or all of the glosses, period:
+... or all of the glosses:
 
 ```Ruby
 lemmas = WordNet::WordNetDB.find("fruit")
-synsets = lemmas.map { |lemma| lemma.synsets }
+synsets = lemmas.map(&:synsets)
 words = synsets.flatten
-words.each { |word| puts word.gloss }
+puts words.map(&:gloss)
 ```
 
 Have your own WordNet database that you've marked up with extra attributes and whatnot?
-No problem:
 
 ```Ruby
 require 'wordnet'
 
-include WordNet
-WordNetDB.path = "/path/to/WordNet-3.0"
-lemmas = WordNetDB.find("fruit")
+WordNet::WordNetDB.path = "/path/to/WordNet-3.0"
+lemmas = WordNet::WordNetDB.find("fruit")
 ...
 ```
+
+Author
+======
+
+[Trevor Fountain](http://texasexpat.net/)<br/>
+trevor@texasexpat.net<br/>
+License: MIT<br/>
+[![Build Status](https://travis-ci.org/doches/rwordnet.png)](https://travis-ci.org/doches/rwordnet)
