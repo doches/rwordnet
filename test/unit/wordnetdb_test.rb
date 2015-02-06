@@ -1,15 +1,17 @@
-require File.dirname(__FILE__) + "/../test_helper.rb"
+require_relative "../test_helper"
 
-class TestWordNetDB < Test::Unit::TestCase
-  include WordNet
-  
-  test 'set and read path' do
-    WordNetDB.path = "WordNetPath"
-    assert_equal "WordNetPath",WordNetDB.path
+describe WordNet::WordNetDB do
+  it 'sets and reads path' do
+    begin
+      old, WordNet::WordNetDB.path = WordNet::WordNetDB.path, "WordNetPath"
+      WordNet::WordNetDB.path.must_equal "WordNetPath"
+    ensure
+      WordNet::WordNetDB.path = old
+    end
   end
-  
-  test 'find a word' do
-    lemmas = WordNetDB.find("fruit")
-    assert_equal 2,lemmas.size
+
+  it 'finds a word' do
+    lemmas = WordNet::WordNetDB.find("fruit")
+    lemmas.size.must_equal 2
   end
 end
