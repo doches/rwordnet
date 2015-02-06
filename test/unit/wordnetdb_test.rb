@@ -14,4 +14,9 @@ describe WordNet::WordNetDB do
     lemmas = WordNet::WordNetDB.find("fruit")
     lemmas.size.must_equal 2
   end
+
+  it 'does not produce a circular reference' do
+    l = WordNet::WordNetDB.find("blink")[1]
+    l.synsets[1].expanded_hypernym.wont_be_nil
+  end
 end
