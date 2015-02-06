@@ -4,21 +4,20 @@ module WordNet
 # Index is a WordNet lexicon. Note that Index is the base class; you probably want to be using the NounIndex, VerbIndex, etc. classes instead.
 # Note that Indices are Singletons -- get an Index object by calling <POS>Index.instance, not <POS>Index.new.
 class Index
+  # Don't instantiate Indices directly -- use the POS-specific subclasses.
+  private_class_method :new
+
   # Create a new index for the given part of speech. +pos+ can be one of +noun+, +verb+, +adj+, or +adv+.
   def initialize(pos)
     @pos = pos
     @db = {}
-    
-    @finished_reading = false
   end
-  
+
   # Find a lemma for a given word. Returns a Lemma which can then be used to access the synsets for the word.
   def find(lemma_str)
     # Look for the lemma in the part of the DB already read...
     return @db[lemma_str] if @db.include?(lemma_str)
-    
-    return nil if @finished_reading
-    
+
     # If we didn't find it, read in some more from the DB.
     index = WordNetDB.open(File.join(WordNetDB.path,"dict","index.#{@pos}"))
 
@@ -35,9 +34,7 @@ class Index
       end
       index.close
     end
-    
-    @finished_reading = true
-    
+
     # If we *still* didn't find it, return nil. It must not be in the database...
     return nil
   end
@@ -46,7 +43,7 @@ end
 # An Index of nouns. Create a NounIndex by calling `NounIndex.instance`
 class NounIndex < Index
   include Singleton
-  
+
   def initialize
     super("noun")
   end
