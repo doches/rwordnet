@@ -2,21 +2,13 @@ require_relative "../test_helper"
 
 describe WordNet::DB do
   it 'sets and reads path' do
-    begin
-      old, WordNet::DB.path = WordNet::DB.path, "WordNetPath"
-      WordNet::DB.path.must_equal "WordNetPath"
-    ensure
-      WordNet::DB.path = old
+    with_db_path("WordNetPath") { WordNet::DB.path.must_equal "WordNetPath" }
+  end
+
+  it "opens a relative path" do
+    result = WordNet::DB.open(File.join("dict", "index.verb")) do |f|
+      f.gets
     end
-  end
-
-  it 'finds a word' do
-    lemmas = WordNet::DB.find("fruit")
-    lemmas.size.must_equal 2
-  end
-
-  it 'does not produce a circular reference' do
-    l = WordNet::DB.find("blink")[1]
-    l.synsets[1].expanded_hypernym.wont_be_nil
+    result.must_equal "  1 This software and database is being provided to you, the LICENSEE, by  \n"
   end
 end

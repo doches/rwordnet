@@ -1,10 +1,8 @@
 require 'rubygems'
 require 'wordnet'
 
-# Open the index file for nouns
-index = WordNet::NounIndex.instance
 # Find the word 'fruit'
-lemma = index.find("fruit")
+lemma = WordNet::Lemma.find("fruit", :noun)
 # Find all the synsets for 'fruit', and pick the first one.
 synset = lemma.synsets[0]
 puts synset
