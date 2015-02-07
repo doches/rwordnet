@@ -15,7 +15,7 @@
 This library implements a pure Ruby interface to the WordNet lexical/semantic
 database. Unlike existing ruby bindings, this one doesn't require you to convert
 the original WordNet database into a new database format; instead it can work directly
-on the database that comes with WordNet. 
+on the database that comes with WordNet.
 
 If you're doing something data-intensive you will achieve much better performance
 with Michael Granger's [Ruby-WordNet](http://www.deveiate.org/projects/Ruby-WordNet/),
@@ -52,7 +52,7 @@ lemma.synsets.each { |synset| puts synset.gloss }
 ...or all of the glosses, period:
 
 ```Ruby
-lemmas = WordNet::WordNetDB.find("fruit")
+lemmas = WordNet::DB.find("fruit")
 synsets = lemmas.map { |lemma| lemma.synsets }
 words = synsets.flatten
 words.each { |word| puts word.gloss }
@@ -64,8 +64,7 @@ No problem:
 ```Ruby
 require 'wordnet'
 
-include WordNet
-WordNetDB.path = "/path/to/WordNet-3.0"
-lemmas = WordNetDB.find("fruit")
+WordNet::DB.path = "/path/to/WordNet-3.0"
+lemmas = WordNet::DB.find("fruit")
 ...
 ```

@@ -1,5 +1,5 @@
 require 'wordnet/pointer'
-require 'wordnet/wordnetdb'
+require 'wordnet/db'
 require 'wordnet/index'
 require 'wordnet/lemma'
 require 'wordnet/pointers'

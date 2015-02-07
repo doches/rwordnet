@@ -10,7 +10,7 @@ module WordNet
     # Create a new synset by reading from the data file specified by +pos+, at +offset+ bytes into the file. This is how
     # the WordNet database is organized. You shouldn't be creating Synsets directly; instead, use Lemma#synsets.
     def initialize(pos, offset)
-      data = File.open(File.join(WordNetDB.path,"dict","data.#{SynsetType[pos]}"),"r")
+      data = File.open(File.join(DB.path,"dict","data.#{SynsetType[pos]}"),"r")
       data.seek(offset)
       data_line = data.readline.strip
       data.close

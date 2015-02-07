@@ -19,7 +19,7 @@ class Index
     return @db[lemma_str] if @db.include?(lemma_str)
 
     # If we didn't find it, read in some more from the DB.
-    index = WordNetDB.open(File.join(WordNetDB.path,"dict","index.#{@pos}"))
+    index = DB.open(File.join(DB.path,"dict","index.#{@pos}"))
 
     lemma_counter = 1
     if not index.closed?
