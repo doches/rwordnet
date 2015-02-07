@@ -1,6 +1,7 @@
 module WordNet
   # Represents a single word in the WordNet lexicon, which can be used to look up a set of synsets.
   class Lemma
+    SPACE = ' '
     attr_accessor :lemma, :pos, :synset_cnt, :p_cnt, :ptr_symbol, :tagsense_cnt, :synset_offset, :id
 
     # Create a lemma from a line in an lexicon file. You should be creating Lemmas by hand; instead,
@@ -44,16 +45,21 @@ module WordNet
 
       # Find a lemma for a given word and pos
       def find(word, pos)
-        cache = @@cache[pos] ||= {}
-        return cache[word] if cache.include?(word)
-
-        DB.open(File.join("dict", "index.#{pos}")).each_line.each_with_index do |line, index|
-          lemma = Lemma.new(line, index + 1)
-          cache[word] = lemma
-          return lemma if line.start_with?("#{word} ")
+        cache = @@cache[pos] ||= build_cache(pos)
+        if found = cache[word]
+          Lemma.new(*found)
         end
+      end
 
-        cache[word] = nil # not in the database
+      private
+
+      def build_cache(pos)
+        cache = {}
+        DB.open(File.join("dict", "index.#{pos}")).each_line.each_with_index do |line, index|
+          word = line.slice(0, line.index(SPACE))
+          cache[word] = [line, index+1]
+        end
+        cache
       end
     end
   end

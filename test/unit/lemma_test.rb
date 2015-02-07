@@ -9,8 +9,18 @@ describe WordNet::Lemma do
 
     it 'caches found' do
       lemma1 = WordNet::Lemma.find("fruit", :noun)
-      lemma2 = WordNet::Lemma.find("fruit", :noun)
-      lemma1.object_id.must_equal lemma2.object_id # not read from file again
+      lemma2 = with_db_path "does-not-exist" do
+        WordNet::Lemma.find("fruit", :noun)
+      end
+      lemma1.word.must_equal lemma2.word
+    end
+
+    it 'only scans the db once' do
+      lemma1 = WordNet::Lemma.find("fruit", :noun)
+      lemma2 = with_db_path "does-not-exist" do
+        WordNet::Lemma.find("table", :noun)
+      end
+      lemma2.word.must_equal "table"
     end
 
     it 'can lookup different things' do
