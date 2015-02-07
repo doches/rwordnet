@@ -62,17 +62,17 @@ module WordNet
 
     # Get the Synset of this sense's antonym
     def antonym
-      get_relation(Antonym)
+      get_relation(ANTONYM)
     end
 
     # Get the parent synset (higher-level category, i.e. fruit -> reproductive_structure).
     def hypernym
-      get_relation(Hypernym)[0]
+      get_relation(HYPERNYM)[0]
     end
 
     # Get the child synset(s) (i.e., lower-level categories, i.e. fruit -> edible_fruit)
     def hyponym
-      get_relation(Hyponym)
+      get_relation(HYPONYM)
     end
 
     # Get the entire hypernym tree (from this synset all the way up to +entity+) as an array.
