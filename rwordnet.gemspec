@@ -1,3 +1,4 @@
+require 'rake'
 require './lib/wordnet/version'
 
 Gem::Specification.new "rwordnet", WordNet::VERSION do |s|
