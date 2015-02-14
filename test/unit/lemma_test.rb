@@ -86,10 +86,9 @@ describe WordNet::Lemma do
       lemma.id.must_equal 123
       lemma.word.must_equal "fruit"
       lemma.pos.must_equal "n"
-      lemma.p_cnt.must_equal 3
-      lemma.ptr_symbol.must_equal ["@", "~", "+"]
-      lemma.tagsense_cnt.must_equal 3
-      lemma.synset_offset.must_equal [13134947, 4612722, 7294550]
+      lemma.pointer_symbols.must_equal ["@", "~", "+"]
+      lemma.tagsense_count.must_equal 3
+      lemma.synset_offsets.must_equal [13134947, 4612722, 7294550]
     end
   end
 end

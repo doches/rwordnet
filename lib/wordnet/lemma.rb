@@ -2,7 +2,7 @@ module WordNet
   # Represents a single word in the WordNet lexicon, which can be used to look up a set of synsets.
   class Lemma
     SPACE = ' '
-    attr_accessor :lemma, :pos, :synset_cnt, :p_cnt, :ptr_symbol, :tagsense_cnt, :synset_offset, :id
+    attr_accessor :word, :pos, :pointer_symbols, :tagsense_count, :synset_offsets, :id
 
     # Create a lemma from a line in an lexicon file. You should be creating Lemmas by hand; instead,
     # use the WordNet::Lemma.find and WordNet::Lemma.find_all methods to find the Lemma for a word.
@@ -10,29 +10,23 @@ module WordNet
       @id = id
       line = lexicon_line.split(" ")
 
-      @lemma = line.shift
+      @word = line.shift
       @pos = line.shift
-      @synset_cnt = line.shift.to_i
-      @p_cnt = line.shift.to_i
-
-      @ptr_symbol = []
-      @p_cnt.times { @ptr_symbol.push line.shift }
+      synset_count = line.shift.to_i
+      @pointer_symbols = line.slice!(0, line.shift.to_i)
       line.shift # Throw away redundant sense_cnt
-      @tagsense_cnt = line.shift.to_i
-      @synset_offset = []
-      @synset_cnt.times { @synset_offset.push line.shift.to_i }
+      @tagsense_count = line.shift.to_i
+      @synset_offsets = line.slice!(0, synset_count).map(&:to_i)
     end
 
     # Return a list of synsets for this Lemma. Each synset represents a different sense, or meaning, of the word.
     def synsets
-      @synset_offset.map { |offset| Synset.new(@pos, offset) }
+      @synset_offsets.map { |offset| Synset.new(@pos, offset) }
     end
 
     def to_s
-      [@lemma, @pos].join(",")
+      [@word, @pos].join(",")
     end
-
-    alias word lemma
 
     class << self
       @@cache = {}
