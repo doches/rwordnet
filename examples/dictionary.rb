@@ -1,5 +1,4 @@
 # Use WordNet as a command-line dictionary.
-require 'rubygems'
 require 'wordnet'
 
 if ARGV.size != 1
@@ -10,7 +9,7 @@ end
 word = ARGV[0]
 
 # Find all the lemmas for a word (i.e., whether it occurs as a noun, verb, etc.)
-lemmas = WordNet::DB.find(word)
+lemmas = WordNet::Lemma.find_all(word)
 
 # Print out each lemma with a list of possible meanings.
 lemmas.each do |lemma|

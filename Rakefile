@@ -7,7 +7,16 @@ Rake::TestTask.new(:test) do |test|
   test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
-task :default => :test
+
+task :examples do
+  Dir["examples/*"].each do |e|
+    command = "ruby -Ilib #{e} fruit"
+    result = `#{command}`
+    raise "FAILED: #{command}: #{result}" unless $?.success?
+  end
+end
+
+task :default => [:test, :examples]
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|

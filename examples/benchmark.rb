@@ -1,10 +1,8 @@
-require 'bundler/setup'
 require 'benchmark'
-$LOAD_PATH.unshift Bundler.root.join("lib")
-require "wordnet"
+require 'wordnet'
 
 initial = Benchmark.realtime do
-  WordNet::Lemma.find('fruit', :noun)
+  WordNet::Lemma.find(ARGV[0] || raise("Usage: ruby benchmark.rb noun"), :noun)
 end
 
 puts "Time to initial word #{initial}"

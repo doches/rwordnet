@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'wordnet'
 
 # Find the word 'fruit'
