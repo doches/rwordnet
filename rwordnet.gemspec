@@ -8,4 +8,5 @@ Gem::Specification.new "rwordnet", WordNet::VERSION do |s|
   s.homepage = "https://github.com/doches/rwordnet"
   s.license = "MIT"
   s.files = FileList["lib/**/*","History.txt","WordNet-3.0/**/*","examples/**/*","test/**/*","README.markdown"]
+  s.required_ruby_version = '>= 1.9.3'
 end

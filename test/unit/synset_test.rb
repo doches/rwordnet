@@ -2,10 +2,7 @@ require_relative "../test_helper"
 
 describe WordNet::Synset do
   def self.synsets
-    @synsets ||= begin
-      index = WordNet::NounIndex.instance
-      index.find("fruit").get_synsets
-    end
+    @synsets ||= WordNet::Lemma.find("fruit", :noun).synsets
   end
 
   let(:synsets) { self.class.synsets }

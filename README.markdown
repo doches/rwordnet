@@ -44,15 +44,14 @@ As an example, consider finding all of the noun glosses for a given word:
 ```Ruby
 require 'wordnet'
 
-index = WordNet::NounIndex.instance
-lemma = index.find("fruit")
+lemma = WordNet::Lemma.find("fruit", :noun)
 lemma.synsets.each { |synset| puts synset.gloss }
 ```
 
 ...or all of the glosses, period:
 
 ```Ruby
-lemmas = WordNet::DB.find("fruit")
+lemmas = WordNet::Lemma.find_all("fruit")
 synsets = lemmas.map { |lemma| lemma.synsets }
 words = synsets.flatten
 words.each { |word| puts word.gloss }
@@ -65,6 +64,6 @@ No problem:
 require 'wordnet'
 
 WordNet::DB.path = "/path/to/WordNet-3.0"
-lemmas = WordNet::DB.find("fruit")
+lemmas = WordNet::Lemma.find_all("fruit")
 ...
 ```
