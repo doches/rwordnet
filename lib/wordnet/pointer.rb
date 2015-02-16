@@ -2,7 +2,7 @@ module WordNet
   class Pointer
     attr_reader :symbol, :offset, :pos, :source, :target
 
-    def initialize(symbol, offset, pos, source)
+    def initialize(symbol: raise, offset: raise, pos: raise, source: raise)
       @symbol, @offset, @pos, @source = symbol, offset, pos, source
       @target = source.slice!(2,2)
     end

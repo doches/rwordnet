@@ -32,10 +32,10 @@ module WordNet
       @p_cnt = line.shift.to_i
       @pointers = Array.new(@p_cnt).map do
         Pointer.new(
-          line.shift[0],
-          line.shift.to_i,
-          line.shift,
-          line.shift
+          symbol: line.shift[0],
+          offset: line.shift.to_i,
+          pos: line.shift,
+          source: line.shift
         )
       end
     end

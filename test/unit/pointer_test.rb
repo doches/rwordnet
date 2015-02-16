@@ -1,7 +1,7 @@
 require_relative "../test_helper"
 
 describe WordNet::Pointer do
-  let(:pointer) { WordNet::Pointer.new("s", 123, "v", "1234") }
+  let(:pointer) { WordNet::Pointer.new(symbol: "s", offset: 123, pos: "v", source: "1234") }
 
   describe "#initialize" do
     it "sets all values" do
@@ -19,7 +19,7 @@ describe WordNet::Pointer do
     end
 
     it "is semantic for all-0" do
-      pointer = WordNet::Pointer.new("s", 123, "v", "0000")
+      pointer = WordNet::Pointer.new(symbol: "s", offset: 123, pos: "v", source: "0000")
       pointer.is_semantic?.must_equal true
     end
   end
