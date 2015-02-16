@@ -79,4 +79,16 @@ describe WordNet::Lemma do
       synsets[1].to_s.must_equal "(n) yield, fruit (an amount of a product)"
     end
   end
+
+  describe ".new" do
+    it "builds all fields" do
+      lemma = WordNet::Lemma.new("fruit n 3 3 @ ~ + 3 3 13134947 04612722 07294550", 123)
+      lemma.id.must_equal 123
+      lemma.word.must_equal "fruit"
+      lemma.pos.must_equal "n"
+      lemma.pointer_symbols.must_equal ["@", "~", "+"]
+      lemma.tagsense_count.must_equal 3
+      lemma.synset_offsets.must_equal [13134947, 4612722, 7294550]
+    end
+  end
 end
