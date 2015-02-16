@@ -1,15 +1,12 @@
 module WordNet
+  # Convenience class for treating hashes as objects, i.e. obj[:key] <=> obj.key
+  class Pointer < Hash
+    def method_missing(*args)
+      fetch(args[0]) { super }
+    end
 
-# Convenience class for treating hashes as objects, i.e. obj[:key] <=> obj.key. I know
-# this is probably a bad idea, but it's so convenient...
-class Pointer < Hash
-  def method_missing(msg, *args)
-    if self.include?(msg)
-      return self[msg] 
-    else
-      throw NoMethodError.new("undefined method `#{msg}' for #{self}:Pointer")
+    def respond_to?(*args)
+      include?(args[0]) || super
     end
   end
-end
-
 end
