@@ -1,12 +1,14 @@
 module WordNet
-  # Convenience class for treating hashes as objects, i.e. obj[:key] <=> obj.key
-  class Pointer < Hash
-    def method_missing(*args)
-      fetch(args[0]) { super }
+  class Pointer
+    attr_reader :symbol, :offset, :pos, :source, :target
+
+    def initialize(symbol, offset, pos, source)
+      @symbol, @offset, @pos, @source = symbol, offset, pos, source
+      @target = source.slice!(2,2)
     end
 
-    def respond_to?(*args)
-      include?(args[0]) || super
+    def is_semantic?
+      source == "00" && target == "00"
     end
   end
 end

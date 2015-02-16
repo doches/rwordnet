@@ -30,18 +30,13 @@ module WordNet
       end
 
       @p_cnt = line.shift.to_i
-      @pointers = []
-      @p_cnt.times do
-        pointer = Pointer.new
-        pointer[:symbol] = line.shift,
-        pointer[:offset] = line.shift.to_i
-        pointer[:pos] = line.shift
-        pointer[:source] = line.shift
-        pointer[:is_semantic?] = (pointer[:source] == "0000")
-        pointer[:target] = pointer[:source][2..3]
-        pointer[:source] = pointer[:source][0..1]
-        pointer[:symbol] = pointer[:symbol][0]
-        @pointers.push pointer
+      @pointers = Array.new(@p_cnt).map do
+        Pointer.new(
+          line.shift[0],
+          line.shift.to_i,
+          line.shift,
+          line.shift
+        )
       end
     end
 
