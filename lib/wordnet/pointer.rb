@@ -1,15 +1,14 @@
 module WordNet
+  class Pointer
+    attr_reader :symbol, :offset, :pos, :source, :target
 
-# Convenience class for treating hashes as objects, i.e. obj[:key] <=> obj.key. I know
-# this is probably a bad idea, but it's so convenient...
-class Pointer < Hash
-  def method_missing(msg, *args)
-    if self.include?(msg)
-      return self[msg] 
-    else
-      throw NoMethodError.new("undefined method `#{msg}' for #{self}:Pointer")
+    def initialize(symbol: raise, offset: raise, pos: raise, source: raise)
+      @symbol, @offset, @pos, @source = symbol, offset, pos, source
+      @target = source.slice!(2,2)
+    end
+
+    def is_semantic?
+      source == "00" && target == "00"
     end
   end
-end
-
 end
