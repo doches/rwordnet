@@ -1,6 +1,6 @@
 module WordNet
 
-  SynsetType = {"n" => "noun", "v" => "verb", "a" => "adj", "r" => "adv"}
+  SYNSET_TYPES = {"n" => "noun", "v" => "verb", "a" => "adj", "r" => "adv"}
 
   # Represents a synset (or group of synonymous words) in WordNet. Synsets are related to each other by various (and numerous!)
   # relationships, including Hypernym (x is a hypernym of y <=> x is a parent of y) and Hyponym (x is a child of y)
@@ -10,7 +10,7 @@ module WordNet
     # Create a new synset by reading from the data file specified by +pos+, at +offset+ bytes into the file. This is how
     # the WordNet database is organized. You shouldn't be creating Synsets directly; instead, use Lemma#synsets.
     def initialize(pos, offset)
-      data = File.open(File.join(DB.path,"dict","data.#{SynsetType[pos]}"),"r")
+      data = File.open(File.join(DB.path,"dict","data.#{SYNSET_TYPES[pos]}"),"r")
       data.seek(offset)
       data_line = data.readline.strip
       data.close
