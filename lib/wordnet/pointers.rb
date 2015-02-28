@@ -1,6 +1,6 @@
 # A container for various constants.
 # In particular, contains constants representing the WordNet symbols used to look up synsets by relation, i.e. Hypernym/Hyponym.
-# Use these symbols in conjunction with the Synset#get_relation method.
+# Use these symbols in conjunction with the Synset#relation method.
 
 module WordNet
   NOUN_POINTERS = {

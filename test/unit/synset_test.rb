@@ -14,20 +14,20 @@ describe WordNet::Synset do
   end
 
   it 'get hypernym for a synset' do
-    hypernym = synsets[0].get_relation(WordNet::HYPERNYM)
+    hypernym = synsets[0].relation(WordNet::HYPERNYM)
     hypernym = synsets[0].hypernym
     assert_equal 1,hypernym.size
     assert_equal "(n) reproductive structure (the parts of a plant involved in its reproduction)",hypernym.to_s
   end
 
   it 'test shorthand for get_relation' do
-    hypernym = synsets[0].get_relation(WordNet::HYPERNYM)
+    hypernym = synsets[0].relation(WordNet::HYPERNYM)
     hypernym2 = synsets[0].hypernym
     assert_equal hypernym[0].gloss, hypernym2.gloss
   end
 
   it 'get hyponyms for a synset' do
-    hyponym = synsets[0].get_relation(WordNet::HYPONYM)
+    hyponym = synsets[0].relation(WordNet::HYPONYM)
     assert_equal 29,hyponym.size
     assert_equal "fruit of various buckthorns yielding dyes or pigments",hyponym[26].gloss
   end
