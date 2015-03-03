@@ -5,6 +5,7 @@
 * renamed WordNet::WordNetDB to WordNet::DB
 * renaming a few methods in Lemma like `p_cnt` -> `pointer_count`
 * make Pointer a real class
+* renaming a few methods in SynSet like `get_relation` -> `relation`
 
 # rWordNet 0.1.3
 * Fixed a terrible bug that caused Indices to re-read the *entire* database on every failed lookup.
