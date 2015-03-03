@@ -3,7 +3,7 @@ require './lib/wordnet/version'
 
 Gem::Specification.new "rwordnet", WordNet::VERSION do |s|
   s.summary = "A pure Ruby interface to the WordNet database"
-  s.authors = ["Trevor Fountain", "Wolfram Sieber"]
+  s.authors = ["Trevor Fountain", "Wolfram Sieber", "Michael Grosser"]
   s.email = "doches@gmail.com"
   s.homepage = "https://github.com/doches/rwordnet"
   s.license = "MIT"
