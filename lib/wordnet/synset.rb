@@ -121,6 +121,11 @@ module WordNet
       list.map! { |offset| Synset.new(@pos, offset)}
     end
 
+    # Returns a compact, human-readable form of this synset, e.g.
+    #
+    #    (v) fall (descend in free fall under the influence of gravity; "The branch fell from the tree"; "The unfortunate hiker fell into a crevasse")
+    #
+    # for the second meaning of the verb "fall."
     def to_s
       "(#{@synset_type}) #{words.map { |x| x.tr('_',' ') }.join(', ')} (#{@gloss})"
     end
