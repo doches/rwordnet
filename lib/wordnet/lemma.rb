@@ -2,7 +2,21 @@ module WordNet
   # Represents a single word in the WordNet lexicon, which can be used to look up a set of synsets.
   class Lemma
     SPACE = ' '
-    attr_accessor :word, :pos, :tagsense_count, :synset_offsets, :id
+
+    # The word this lemma represents
+    attr_accessor :word
+
+    # The part of speech (noun, verb, adjective) of this lemma. One of 'n', 'v', 'a' (adjective), or 'r' (adverb)
+    attr_accessor :pos
+
+    # The number of times the sense is tagged in various semantic concordance texts. A tagsense_count of 0 indicates that the sense has not been semantically tagged.
+    attr_accessor :tagsense_count
+
+    # The offset, in bytes, at which the synsets contained in this lemma are stored in WordNet's internal database.
+    attr_accessor :synset_offsets
+
+    # A unique integer id that references this lemma. Used internally within WordNet's database.
+    attr_accessor :id
 
     # An array of valid pointer symbols for this lemma. The list of all valid
     # pointer symbols is defined in pointers.rb.
@@ -28,6 +42,8 @@ module WordNet
       @synset_offsets.map { |offset| Synset.new(@pos, offset) }
     end
 
+    # Returns a compact string representation of this lemma, e.g. "fall, v" for
+    # the verb form of the word "fall".
     def to_s
       [@word, @pos].join(",")
     end
@@ -35,6 +51,7 @@ module WordNet
     class << self
       @@cache = {}
 
+      # Find all lemmas for this word across all known parts of speech
       def find_all(word)
         [:noun, :verb, :adj, :adv].flat_map do |pos|
           find(word, pos) || []
