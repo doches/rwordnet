@@ -9,6 +9,11 @@ module WordNet
       # Returns the path to the WordNet installation currently in use. Defaults to the bundled version of WordNet.
       attr_accessor :path
 
+      # Open a wordnet database. You shouldn't have to call this directly; it's
+      # handled by the autocaching implemented in lemma.rb.
+      #
+      # `path` should be a string containing the absolute path to the root of a
+      # WordNet installation.
       def open(path, &block)
         File.open(File.join(self.path, path), "r", &block)
       end

@@ -50,7 +50,12 @@ module WordNet
       @word_counts.keys
     end
 
-    # List of valid +pointer_symbol+s is in pointers.rb
+    # Get an array of Synsets with the relation `pointer_symbol` relative to this
+    # Synset. Mostly, this is an internal method used by convience methods (e.g. Synset#antonym), but
+    # it can take any valid valid +pointer_symbol+ defined in pointers.rb.
+    #
+    # Example (get the gloss of an antonym for 'fall'): 
+    #     WordNet::Lemma.find("fall", :verb).synsets[1].relation("!")[0].gloss
     def relation(pointer_symbol)
       @pointers.select { |pointer| pointer.symbol == pointer_symbol }.
         map! { |pointer| Synset.new(@synset_type, pointer.offset) }

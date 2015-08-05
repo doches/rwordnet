@@ -2,9 +2,13 @@ module WordNet
   # Represents a single word in the WordNet lexicon, which can be used to look up a set of synsets.
   class Lemma
     SPACE = ' '
-    attr_accessor :word, :pos, :pointer_symbols, :tagsense_count, :synset_offsets, :id
+    attr_accessor :word, :pos, :tagsense_count, :synset_offsets, :id
 
-    # Create a lemma from a line in an lexicon file. You should be creating Lemmas by hand; instead,
+    # An array of valid pointer symbols for this lemma. The list of all valid
+    # pointer symbols is defined in pointers.rb.
+    attr_accessor :pointer_symbols
+
+    # Create a lemma from a line in an lexicon file. You should not be creating Lemmas by hand; instead,
     # use the WordNet::Lemma.find and WordNet::Lemma.find_all methods to find the Lemma for a word.
     def initialize(lexicon_line, id)
       @id = id
