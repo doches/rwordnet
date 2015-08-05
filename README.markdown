@@ -1,7 +1,7 @@
 # A pure Ruby interface to WordNet #
 
 [![Build Status](https://travis-ci.org/doches/rwordnet.png)](https://travis-ci.org/doches/rwordnet)
-[![Documentation Status](https://inch-ci.org/github/doches/rwordnet.svg?branch=develop)](https://inch-ci.org/github/doches/rwordnet)
+[![Documentation Status](https://inch-ci.org/github/doches/rwordnet.svg?branch=master)](https://inch-ci.org/github/doches/rwordnet)
 
 ## Summary ##
 
