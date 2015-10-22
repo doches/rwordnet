@@ -91,7 +91,7 @@ module WordNet
     end
 
     # Get the Synset of this sense's antonym
-    def antonym
+    def antonyms
       relation(ANTONYM)
     end
 
@@ -101,12 +101,12 @@ module WordNet
     end
 
     # Get the child synset(s) (i.e., lower-level categories, i.e. fruit -> edible_fruit)
-    def hyponym
+    def hyponyms
       relation(HYPONYM)
     end
 
     # Get the entire hypernym tree (from this synset all the way up to +entity+) as an array.
-    def expanded_hypernym
+    def expanded_hypernyms
       parent = hypernym
       list = []
       return list unless parent
