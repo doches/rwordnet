@@ -241,6 +241,24 @@ module WordNet
       list.map! { |offset| Synset.new(@pos, offset)}
     end
 
+    def expanded_hypernyms_depth
+      parents = hypernyms.map{|hypernym| [hypernym, 1]}
+      list = []
+      out = []
+      return list unless parents
+
+      max_depth = 1
+      while parents.length > 0
+        parent, depth = parents.pop
+        next if list.include? parent.pos_offset
+        list.push parent.pos_offset
+        out.push [Synset.new(@pos, parent.pos_offset), depth]
+        parents.push *(parent.hypernyms.map{|hypernym| [hypernym, depth + 1]})
+        max_depth = [max_depth, depth].max
+      end
+      return [out, max_depth]
+    end
+
     # Returns a compact, human-readable form of this synset, e.g.
     #
     #    (v) fall (descend in free fall under the influence of gravity; "The branch fell from the tree"; "The unfortunate hiker fell into a crevasse")
