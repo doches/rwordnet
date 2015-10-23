@@ -67,7 +67,7 @@ describe WordNet::Lemma do
 
     it "does not produce a circular reference" do
       l = WordNet::Lemma.find_all("blink")[1]
-      l.synsets[1].expanded_hypernym.wont_be_nil
+      l.synsets[1].expanded_first_hypernyms.wont_be_nil
     end
   end
 

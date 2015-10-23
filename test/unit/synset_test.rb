@@ -33,7 +33,7 @@ describe WordNet::Synset do
   end
 
   it 'test expanded hypernym tree' do
-    expanded = synsets[0].expanded_hypernym
+    expanded = synsets[0].expanded_first_hypernyms
     assert_equal 8, expanded.size
     assert_equal "entity", expanded[expanded.size-1].words[0]
   end
