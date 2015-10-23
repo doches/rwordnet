@@ -86,14 +86,15 @@ module WordNet
     # will be loaded. 
     # If lang is specified, all the synsets associated with the lemma name
     # of that language will be returned.
-#    def synsets(self, lemma, pos)
-#        lemma = lemma.downcase
-#        index = self._lemma_pos_offset_map
-#        return [Synset(pos, offset)
-#                for form in self._morphy(lemma, pos)
-#                for offset in index[form].get(pos, [])]
-#    end
+    def self.find(word, pos)
+        word = word.downcase
+        lemmas = self.morphy(word, pos).map{|form| WordNet::Lemma.find(form, pos)}
+        lemmas.map{|lemma| lemma.synsets}.flatten
+    end
 
+    def self.find_all(word)
+        SYNSET_TYPES.values.map{|pos| self.find(word, pos)}.flatten
+    end
 
     def self.load_exception_map
         SYNSET_TYPES.each do |_, pos|
