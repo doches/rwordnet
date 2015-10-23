@@ -100,13 +100,18 @@ module WordNet
       relation(HYPERNYM)[0]
     end
 
+    # Get the parent synset (higher-level category, i.e. fruit -> reproductive_structure).
+    def hypernyms
+      relation(HYPERNYM)
+    end
+
     # Get the child synset(s) (i.e., lower-level categories, i.e. fruit -> edible_fruit)
     def hyponyms
       relation(HYPONYM)
     end
 
     # Get the entire hypernym tree (from this synset all the way up to +entity+) as an array.
-    def expanded_hypernyms
+    def expanded_first_hypernyms
       parent = hypernym
       list = []
       return list unless parent
@@ -114,7 +119,24 @@ module WordNet
       while parent
         break if list.include? parent.pos_offset
         list.push parent.pos_offset
-        parent = parent.parent
+        parent = parent.hypernym
+      end
+
+      list.flatten!
+      list.map! { |offset| Synset.new(@pos, offset)}
+    end
+
+    # Get the entire hypernym tree (from this synset all the way up to +entity+) as an array.
+    def expanded_hypernyms
+      parents = hypernyms
+      list = []
+      return list unless parents
+
+      while parents.length > 0
+        parent = parents.pop
+        next if list.include? parent.pos_offset
+        list.push parent.pos_offset
+        parents.push *parent.hypernyms
       end
 
       list.flatten!
@@ -130,8 +152,10 @@ module WordNet
       "(#{@synset_type}) #{words.map { |x| x.tr('_',' ') }.join(', ')} (#{@gloss})"
     end
 
+    alias to_str to_s
     alias size word_count
     alias parent hypernym
-    alias children hyponym
+    alias parents hypernyms
+    alias children hyponyms
   end
 end
