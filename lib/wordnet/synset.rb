@@ -1,19 +1,19 @@
 module WordNet
   SYNSET_TYPES = {"n" => "noun", "v" => "verb", "a" => "adj", "r" => "adv"}
+  MORPHOLOGICAL_SUBSTITUTIONS = {
+      'noun' => [['s', ''], ['ses', 's'], ['ves', 'f'], ['xes', 'x'],
+             ['zes', 'z'], ['ches', 'ch'], ['shes', 'sh'],
+             ['men', 'man'], ['ies', 'y']],
+      'verb' => [['s', ''], ['ies', 'y'], ['es', 'e'], ['es', ''],
+             ['ed', 'e'], ['ed', ''], ['ing', 'e'], ['ing', '']],
+      'adj' => [['er', ''], ['est', ''], ['er', 'e'], ['est', 'e']],
+      'adv' => []}
 
   # Represents a synset (or group of synonymous words) in WordNet. Synsets are related to each other by various (and numerous!)
   # relationships, including Hypernym (x is a hypernym of y <=> x is a parent of y) and Hyponym (x is a child of y)
   class Synset
     @morphy_path = File.expand_path("../../../morphy/", __FILE__)
     @exception_map = {}
-    @morphological_substitutions = {
-        'noun' => [['s', ''], ['ses', 's'], ['ves', 'f'], ['xes', 'x'],
-               ['zes', 'z'], ['ches', 'ch'], ['shes', 'sh'],
-               ['men', 'man'], ['ies', 'y']],
-        'verb' => [['s', ''], ['ies', 'y'], ['es', 'e'], ['es', ''],
-               ['ed', 'e'], ['ed', ''], ['ing', 'e'], ['ing', '']],
-        'adj' => [['er', ''], ['est', ''], ['er', 'e'], ['est', 'e']],
-        'adv' => []}
 
     # Get the offset, in bytes, at which this synset's information is stored in WordNet's internal DB.
     # You almost certainly don't care about this.
@@ -83,7 +83,7 @@ module WordNet
     # Ported from python NLTK
     # Load all synsets with a given lemma and part of speech tag.
     # If no pos is specified, all synsets for all parts of speech
-    # will be loaded. 
+    # will be loaded.
     # If lang is specified, all the synsets associated with the lemma name
     # of that language will be returned.
     def self.find(word, pos)
@@ -107,7 +107,7 @@ module WordNet
     end
 
     def self._apply_rules(forms, pos)
-        substitutions = @morphological_substitutions[pos]
+        substitutions = MORPHOLOGICAL_SUBSTITUTIONS[pos]
         out = []
         forms.each do |form|
             substitutions.each do |old, new|

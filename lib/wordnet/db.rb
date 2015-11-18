@@ -7,7 +7,6 @@ module WordNet
     class << self; attr_accessor :cached end
     @raw_wordnet = {}
 
-
     class << self
       # To use your own WordNet installation (rather than the one bundled with rwordnet:
       # Returns the path to the WordNet installation currently in use. Defaults to the bundled version of WordNet.

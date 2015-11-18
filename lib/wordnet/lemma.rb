@@ -64,7 +64,7 @@ module WordNet
       # forms of each of these ('a', 'r', 'n', 'v')/
       def find(word, pos)
         # Map shorthand POS to full forms
-        pos = Lemma::POS_SHORTHAND[pos] || pos
+        pos = POS_SHORTHAND[pos] || pos
 
         cache = @@cache[pos] ||= build_cache(pos)
         if found = cache[word]
