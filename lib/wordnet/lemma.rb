@@ -58,8 +58,14 @@ module WordNet
         end
       end
 
-      # Find a lemma for a given word and pos
+      # Find a lemma for a given word and pos. Valid parts of speech are:
+      # 'adj', 'adv', 'noun', 'verb'. Additionally, you can use the shorthand
+      # forms of each of these ('j', 'a', 'n', 'v')/
       def find(word, pos)
+        # Map shorthand POS to full forms
+        shorthand = {:v => :verb, :n => :noun, :j => :adj, :a => :adv}
+        pos = shorthand[pos] if not shorthand[pos].nil?
+
         cache = @@cache[pos] ||= build_cache(pos)
         if found = cache[word]
           Lemma.new(*found)
