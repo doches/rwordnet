@@ -3,3 +3,6 @@ bundler_args: ""
 rvm:
   - 2.0.0
   - 2.1.5
+addons:
+    code_climate:
+        repo_token: f9be8b6155e91be37d7263929ea89028294d3f18e3cfc84c2396869e62d3d715

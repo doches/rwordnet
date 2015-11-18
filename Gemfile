@@ -1,7 +1,13 @@
 source "https://rubygems.org"
 
-gem "rake"
-gem "bump"
-gem "rdoc"
-gem "maxitest"
+group :development do
+  gem "rake"
+  gem "bump"
+  gem "rdoc"
+  gem "maxitest"
+  gem "simplecov"
+end
 
+group :test do
+  gem "codeclimate-test-reporter"
+end
