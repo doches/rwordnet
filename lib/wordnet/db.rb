@@ -1,5 +1,3 @@
-require 'stringio'
-
 module WordNet
   # Represents the WordNet database, and provides some basic interaction.
   class DB
