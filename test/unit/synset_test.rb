@@ -37,4 +37,40 @@ describe WordNet::Synset do
     assert_equal 8, expanded.size
     assert_equal "entity", expanded[expanded.size-1].words[0]
   end
+
+  it 'finds a correct antonym' do
+    to_fall = WordNet::Lemma.find("fall", :verb).synsets[1]
+    assert_includes to_fall.antonyms[0].words, "rise"
+  end
+
+  it 'finds hypernyms and hyponyms' do
+    animal =  WordNet::Lemma.find("animal", :noun).synsets[0]
+    assert_includes animal.hyponyms[0].words, "pest"
+    assert_includes animal.hypernyms[0].words, "organism"
+  end
+
+  it 'lemmatises with morphy' do
+    assert_includes WordNet::Synset.morphy('animals', 'noun'), "animal"
+    assert_includes WordNet::Synset.morphy_all('animals'), "animal"
+  end
+
+  it 'returns an empty list for unmorphiable words' do
+    assert_equal WordNet::Synset.morphy('not_a_word!#@', 'noun').size, 0
+  end
+
+  it 'finds lemmatised synsets' do
+    take = WordNet::Synset.find_all('take').map { |x| x.words }.flatten
+    assert_includes take, "claim"
+    assert_includes take, "ingest"
+  end
+
+  it 'finds expanded hypernyms' do
+    animal =  WordNet::Lemma.find("animal", :noun).synsets[0]
+    assert_includes animal.expanded_hypernyms.map { |x| x.words }.flatten, "entity"
+  end
+
+  it 'finds expanded hypernyms with the right depth' do
+    animal =  WordNet::Lemma.find("animal", :noun).synsets[0]
+    assert_equal animal.expanded_hypernyms_depth[1], 6
+  end
 end
