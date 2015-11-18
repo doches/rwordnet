@@ -188,7 +188,7 @@ module WordNet
         map! { |pointer| Synset.new(@synset_type, pointer.offset) }
     end
 
-    # Get the Synset of this sense's antonym
+    # Get the Synsets of this sense's antonym
     def antonyms
       relation(ANTONYM)
     end
@@ -198,7 +198,8 @@ module WordNet
       relation(HYPERNYM)[0]
     end
 
-    # Get the parent synset (higher-level category, i.e. fruit -> reproductive_structure).
+    # Get the parent synset (higher-level category, i.e. fruit -> reproductive_structure)
+    # as an array.
     def hypernyms
       relation(HYPERNYM)
     end
