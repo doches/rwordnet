@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/doches/rwordnet.png)](https://travis-ci.org/doches/rwordnet)
 [![Documentation Status](https://inch-ci.org/github/doches/rwordnet.svg?branch=master)](https://inch-ci.org/github/doches/rwordnet)
+[![Code Climate](https://codeclimate.com/github/doches/rwordnet/badges/gpa.svg)](https://codeclimate.com/github/doches/rwordnet)
 [![Test Coverage](https://codeclimate.com/github/doches/rwordnet/badges/coverage.svg)](https://codeclimate.com/github/doches/rwordnet/coverage)
 
 ## Summary ##
