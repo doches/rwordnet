@@ -73,4 +73,11 @@ describe WordNet::Synset do
     animal =  WordNet::Lemma.find("animal", :noun).synsets[0]
     assert_equal animal.expanded_hypernyms_depth[1], 6
   end
+
+  it 'understands short forms in lemma lookups' do
+    animal =  WordNet::Lemma.find("animal", :noun).synsets[0]
+    shortform =  WordNet::Lemma.find("animal", :n).synsets[0]
+
+    assert_equal animal.to_s, shortform.to_s
+  end
 end
