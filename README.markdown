@@ -1,5 +1,6 @@
 # A pure Ruby interface to WordNet #
 
+[![Gem Version](https://badge.fury.io/rb/rwordnet.svg)](http://badge.fury.io/rb/rwordnet)
 [![Build Status](https://travis-ci.org/doches/rwordnet.png)](https://travis-ci.org/doches/rwordnet)
 [![Documentation Status](https://inch-ci.org/github/doches/rwordnet.svg?branch=master)](https://inch-ci.org/github/doches/rwordnet)
 [![Code Climate](https://codeclimate.com/github/doches/rwordnet/badges/gpa.svg)](https://codeclimate.com/github/doches/rwordnet)
