@@ -2,6 +2,7 @@ module WordNet
   # Represents a single word in the WordNet lexicon, which can be used to look up a set of synsets.
   class Lemma
     SPACE = ' '
+    POS_SHORTHAND = {:v => :verb, :n => :noun, :a => :adj, :r => :adv}
 
     # The word this lemma represents
     attr_accessor :word
@@ -63,8 +64,7 @@ module WordNet
       # forms of each of these ('a', 'r', 'n', 'v')/
       def find(word, pos)
         # Map shorthand POS to full forms
-        shorthand = {:v => :verb, :n => :noun, :a => :adj, :r => :adv}
-        pos = shorthand[pos] if not shorthand[pos].nil?
+        pos = Lemma::POS_SHORTHAND[pos] || pos
 
         cache = @@cache[pos] ||= build_cache(pos)
         if found = cache[word]
