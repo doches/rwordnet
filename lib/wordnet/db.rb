@@ -7,7 +7,6 @@ module WordNet
     @path = File.expand_path("../../../WordNet-3.0/", __FILE__)
 
     class << self; attr_accessor :cached end
-    @cached = false
     @raw_wordnet = {}
 
 
@@ -22,25 +21,7 @@ module WordNet
       # `path` should be a string containing the absolute path to the root of a
       # WordNet installation.
       def open(path, &block)
-        if not @cached
-            File.open(File.join(self.path, path), "r", &block)
-        else
-            self.open_with_cache(path, &block)
-        end
-
-      end
-
-      def open_with_cache(path, &block)
-        path = File.join(self.path, path)
-        if not @raw_wordnet.has_key? path
-            @raw_wordnet[path] = StringIO.new File.open(path).read
-        end
-        fp = @raw_wordnet[path]
-        if not block
-            fp
-        else
-            yield fp
-        end
+        File.open(File.join(self.path, path), "r", &block)
       end
     end
   end
