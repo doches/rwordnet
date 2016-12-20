@@ -1,5 +1,5 @@
 require 'benchmark'
-require 'wordnet'
+require 'rwordnet'
 
 initial = Benchmark.realtime do
   WordNet::Lemma.find(ARGV[0] || raise("Usage: ruby benchmark.rb noun"), :noun)

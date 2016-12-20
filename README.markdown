@@ -27,6 +27,10 @@ since it converts the WordNet database into a BerkelyDB file for quicker access.
 writing rwordnet, I've focused more on usability and ease of installation ( *gem install
 rwordnet* ) at the expense of some performance. Use at your own risk, etc.
 
+| Note |
+| --- |
+| `2.0.0` changed how you require rwordnet from `require 'wordnet'` to `require 'rwordnet'` (note the extra `r`!).  |
+
 ## Installation ##
 
 One of the chief benefits of rwordnet over Ruby-WordNet is how easy it is to install:
@@ -46,7 +50,7 @@ use.
 As an example, consider finding all of the noun glosses for a given word:
 
 ```Ruby
-require 'wordnet'
+require 'rwordnet'
 
 lemma = WordNet::Lemma.find("fruit", :noun)
 lemma.synsets.each { |synset| puts synset.gloss }
@@ -65,9 +69,8 @@ Have your own WordNet database that you've marked up with extra attributes and w
 No problem:
 
 ```Ruby
-require 'wordnet'
+require 'rwordnet'
 
 WordNet::DB.path = "/path/to/WordNet-3.0"
 lemmas = WordNet::Lemma.find_all("fruit")
-...
 ```

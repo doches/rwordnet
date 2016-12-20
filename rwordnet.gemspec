@@ -1,5 +1,5 @@
 require 'rake'
-require './lib/wordnet/version'
+require './lib/rwordnet/version'
 
 Gem::Specification.new "rwordnet", WordNet::VERSION do |s|
   s.summary = "A pure Ruby interface to the WordNet database"

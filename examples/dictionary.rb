@@ -1,5 +1,5 @@
 # Use WordNet as a command-line dictionary.
-require 'wordnet'
+require 'rwordnet'
 
 if ARGV.size != 1
   puts "Usage: ruby dictionary.rb word"

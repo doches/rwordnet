@@ -1,5 +1,0 @@
-require 'wordnet/pointer'
-require 'wordnet/db'
-require 'wordnet/lemma'
-require 'wordnet/pointers'
-require 'wordnet/synset'

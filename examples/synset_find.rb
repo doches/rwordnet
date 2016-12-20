@@ -1,4 +1,4 @@
-require 'wordnet'
+require 'rwordnet'
 
 puts 'hiking'
 WordNet::Synset.find_all('hiking').each{|d| puts d}

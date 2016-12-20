@@ -23,7 +23,7 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "rwordnet #{WordNet::VERSION}"
   rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/wordnet/*.rb')
+  rdoc.rdoc_files.include('lib/rwordnet/*.rb')
   rdoc.options += ["-SHN","-f","darkfish"]
 end
 

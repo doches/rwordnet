@@ -1,4 +1,4 @@
-require 'wordnet'
+require 'rwordnet'
 
 # Find the word 'dog'
 lemma = WordNet::Lemma.find("dog", :noun)

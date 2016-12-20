@@ -21,7 +21,7 @@ require "bundler/setup"
 require "maxitest/autorun"
 
 $LOAD_PATH.unshift Bundler.root.join("lib")
-require "wordnet"
+require "rwordnet"
 
 Minitest::Test.class_eval do
   def with_db_path(path)

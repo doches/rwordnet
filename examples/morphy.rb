@@ -1,4 +1,4 @@
-require 'wordnet'
+require 'rwordnet'
 
 puts 'dogs'
 puts '--------------'
