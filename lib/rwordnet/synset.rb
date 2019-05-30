@@ -209,6 +209,14 @@ module WordNet
       relation(HYPONYM)
     end
 
+    # Get the entire hyponym tree as an array
+    def expanded_hyponyms
+      children = self.hyponyms
+      return [] if children.empty?
+      
+      return [children, children.collect{|child| child.expanded_hyponyms}.flatten].flatten
+    end
+    
     # Get the entire hypernym tree (from this synset all the way up to +entity+) as an array.
     def expanded_first_hypernyms
       parent = hypernym
