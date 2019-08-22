@@ -71,3 +71,7 @@ WordNet::DB.path = "/path/to/WordNet-3.0"
 lemmas = WordNet::Lemma.find_all("fruit")
 ...
 ```
+
+## Licensing ##
+
+Because rwordnet bundles its own distribution of Wordnet, it's implicitly provided under the Wordnet (3.0) license. See LICENSE.md alongside this file for details.
